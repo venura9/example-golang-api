@@ -9,7 +9,9 @@ import (
 func main() {
 	r := gin.Default()
 
-	middleware.UrlRewrite(r, "/", "/ping"),
+	r.GET("/", func(c *gin.Context) {
+		c.Redirect(302, "/ping")
+	})
 
 	r.GET("/ping", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
